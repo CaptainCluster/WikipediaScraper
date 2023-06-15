@@ -1,0 +1,3 @@
+BeautifulSoup and Requests must be installed in order to web scrape.
+Before you use the program, I recommend you to get familiar with how robot.txt is related to all this. 
+Check this link out: https://en.wikipedia.org/robots.txt
