@@ -4,17 +4,20 @@ import WikipediaScraper_FileWriter
 
 def mainWhileLoop():
     try:
-        retryRequest = input("Do you want to scrape something else? 0 = No, 1 = Yes ")
+        userWantsToStop = False
+        retryRequest = input("Do you want to scrape something? 0 = No, 1 = Yes ")
         if int(retryRequest) == 0:
+            userWantsToStop = True
             print("Ending program")
         elif int(retryRequest) == 1:
+            userWantsToStop = False
             print("Continuing")
         else:
             print("Insert either 0 (No) or 1 (Yes)!") 
     except Exception:
         print("Type in something that is a number (type: integer)")
-        retryRequest = mainWhileLoop()
-    return retryRequest
+        userWantsToStop = mainWhileLoop()
+    return userWantsToStop
             
 
 def userInputRequest():
@@ -39,20 +42,13 @@ def process():
     WikipediaScraper_FileWriter.fileWriter(tagTextList, userInput[1])
     print("The results have been written to the desired .txt file")
 
+
+
 def main():
-    retryRequest = 1
-    notFirstRun = False
-    while True: 
-        if(notFirstRun):
-            while True:
-                retryRequest = mainWhileLoop()
-                if(int(retryRequest) == 0 or int(retryRequest) == 1):
-                    break
-        if int(retryRequest) != 0:
-            process()
-            notFirstRun = True
-        else:
-            break
+    userWantsToStop = False
+    while not userWantsToStop: 
+        process()
+        userWantsToStop = mainWhileLoop()
     print("Thank you for using the Wikipedia scraper!")
 
 main()
